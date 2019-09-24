@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    int t,ox,oy,ax,ay,bx,by,c,i;
+    scanf("%d",&t);
+    double r,angle,dis,R;
+    for(i = 1; i<=t; i++)
+    {
+        scanf("%d %d %d %d %d %d",&ox,&oy,&ax,&ay,&bx,&by);
+        R = ((ax-ox)*(ax-ox)) + ((ay-oy)*(ay-oy));
+        r = sqrt(R);
+        c = ((bx-ax)*(bx-ax)) + ((by-ay)*(by-ay));
+        //cout<<r<<" "<<c<<endl;
+        angle = acos(1 - (c/(2.0*R)));
+        dis = r*angle;
+ 
+ 
+ 
+        printf("Case %d: %lf\n",i,dis);
+    }
+}
