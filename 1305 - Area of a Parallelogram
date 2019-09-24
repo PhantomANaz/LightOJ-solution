@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int ax,bx,cx,ay,by,cy,dx,dy,area,t;
+    cin >> t;
+ 
+    for(int i = 1; i<=t; i++)
+    {
+        cin >> ax >> ay >> bx >> by >> cx >> cy;
+        dx = cx - bx + ax;
+        dy = cy - by + ay;
+ 
+        area = abs(ax*(by - cy) - ay*(bx - cx) + bx*cy - by*cx);
+        cout<<"Case "<<i<<": "<<dx<<" "<<dy<<" "<<area<<endl;
