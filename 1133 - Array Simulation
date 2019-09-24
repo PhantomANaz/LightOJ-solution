@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    int t,n,m,d,x,y;
+    char ch;
+ 
+    cin >> t;
+    for(int i = 1; i<=t; i++)
+    {
+        cin >> n >> m;
+        vector<int> a;
+        for(int j = 0; j<n; j++){
+            cin >> d;
+            a.push_back(d);
+        }
+        while(m--)
+        {
+            cin >> ch;
+            if(ch == 'S')
+            {
+                cin >> d;
+                for(int j = 0; j<n; j++)
+                    a[j] += d;
+            }
+            else if(ch == 'M')
+            {
+                cin >> d;
+                for(int j = 0; j<n; j++)
+                    a[j] *= d;
+            }
+            else if(ch == 'D')
+            {
+                cin >> d;
+                for(int j = 0; j<n; j++)
+                    a[j] /= d;
+            }
+            else if(ch == 'R')
+                std::reverse(a.begin(), a.end());
+            else if(ch == 'P')
+            {
+                cin >> x >> y;
+                swap(a[x], a[y]);
+            }
+        }
+        cout<<"Case "<<i<<":"<<endl;
+        for(int j = 0; j<n; j++){
+            cout<<a[j];
+            if(j != n-1)
+                cout<<" ";
+        }
+        cout<<endl;
+    }
+}
