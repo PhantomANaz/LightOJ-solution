@@ -1,0 +1,72 @@
+//Lazy without Propagation
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int toogle[400050];
+string str;
+void build(int a,int L,int R){
+    if(L==R){
+        toogle[a]=(str[L-1]-'0');
+        return;
+    }
+
+    int mid = (L+R)/2;
+
+    build(a*2,L,mid);
+    build((a*2)+1,mid+1,R);
+}
+
+void update(int node, int L, int R, int l, int r)
+{
+    if(r < L || R < l)return;
+    if(l <= L && R <= r){
+        toogle[node] ^= 1;
+        return;
+    }
+    int mid = (L+R)/2;
+    update(2*node, L, mid, l, r);
+    update(2*node+1, mid+1, R, l, r);
+}
+int query(int node, int L, int R, int pos)
+{
+    if(pos < L || R < pos)return 0;
+    if(L == R)return toogle[node];
+    int mid = (L+R)/2;
+    if(pos <= mid)
+        return query(2*node, L, mid, pos)^toogle[node];
+    else
+        return query(2*node+1, mid + 1, R, pos)^toogle[node];
+}
+int main()
+{
+    int n,a,b,t,q;
+    char ch;
+    scanf("%d",&t);
+    for(int i = 1; i<=t; i++){
+        printf("Case %d:\n",i);
+        //cout<<"Case "<<i<<":"<<endl;
+        memset(toogle, 0, sizeof(toogle));
+        //scanf("%s",str);
+        cin >> str;
+        n = str.length();
+        scanf("%d",&q);
+        build(1,1,n);
+        //getchar();
+        while(q--){
+            scanf(" %c",&ch);
+            if(ch == 'I'){
+                scanf("%d%d",&a,&b);
+                update(1, 1, n, a, b);
+            }
+            else if(ch == 'Q')
+            {
+                scanf("%d",&a);
+                b = query(1, 1, n, a);
+
+                printf("%d\n",b);
+            }
+        }
+    }
+    return 0;
+}
